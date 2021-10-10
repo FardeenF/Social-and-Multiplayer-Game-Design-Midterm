@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        //vSpeed -= gravity * Time.deltaTime;
+ 
         Vector3 direction = new Vector3(horizontal, 0.0f, vertical).normalized;
 
         if (direction.magnitude >= 0.1f)
@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f);
 
             Vector3 moveDir = Quaternion.Euler(0.0f, targetAngle, 0.0f) * Vector3.forward;
-            //rb.AddForce(moveDir.normalized * speed * Time.deltaTime);
 
             moveDir.y += vSpeed;
 
@@ -54,7 +53,7 @@ public class PlayerController : MonoBehaviour
         if(col.gameObject.tag == "Coin")
         {
             Debug.Log("Hit!");
-            Destroy(col.gameObject);
+            col.gameObject.transform.Translate(new Vector3(0.0f, 80.0f, 0.0f));
             coinCount++;
         }
     }
