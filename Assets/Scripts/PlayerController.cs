@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     public Animator anim;
     public CharacterController controller;
     public Transform cam;
-    //public Rigidbody rb;
+    public Rigidbody rb;
 
     public float speed = 6.0f;
 
@@ -43,17 +43,7 @@ public class PlayerController : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
 
-
-        //if(rb.velocity.magnitude > 0)
-        //{
-        //    anim.Play(1);
-        //}
-        //else
-        //{
-        //    anim.Play(0);
-        //}
-
-        if(coinCount == 10)
+        if (coinCount == 10)
         {
             SceneManager.LoadScene("End");
         }
