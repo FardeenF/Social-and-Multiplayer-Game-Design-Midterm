@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     float vSpeed = 0.0f;
     public float gravity = 9.8f;
+
+    int coinCount = 0;
 
     // Update is called once per frame
     void Update()
@@ -40,11 +43,6 @@ public class PlayerController : MonoBehaviour
             controller.Move(moveDir.normalized * speed * Time.deltaTime);
         }
 
-        if(controller.isGrounded)
-        {
-            vSpeed = 0;
-            Debug.Log("Grounded!");
-        }
 
         //if(rb.velocity.magnitude > 0)
         //{
@@ -54,5 +52,20 @@ public class PlayerController : MonoBehaviour
         //{
         //    anim.Play(0);
         //}
+
+        if(coinCount == 10)
+        {
+            SceneManager.LoadScene("End");
+        }
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if(col.gameObject.tag == "Coin")
+        {
+            Debug.Log("Hit!");
+            Destroy(col.gameObject);
+            coinCount++;
+        }
     }
 }
